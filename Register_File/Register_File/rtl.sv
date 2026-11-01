@@ -1,4 +1,3 @@
-
 module register_file(
     input  logic [4:0]  rs1_sel,
     input  logic [4:0]  rs2_sel,
