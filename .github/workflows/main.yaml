@@ -1,77 +1,28 @@
-yaml_version: 1
-stage: integration
+name: RISC-V Verilog CI
 
-modules:
-  if_stage:
-    source_files:
-      - IF_Stage/rtl.sv
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
 
-  decoder:
-    source_files:
-      - Decoder/rtl.sv
+jobs:
+  syntax-check:
+    name: SystemVerilog Syntax Check
+    runs-on: ubuntu-latest
 
-  imm_generator:
-    source_files:
-      - Immediate_Generator/rtl.sv
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-  register_file:
-    source_files:
-      - Register_File/rtl.sv
+      - name: Install Icarus Verilog
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y iverilog
 
-  main_control:
-    source_files:
-      - Main_Control/rtl.sv
-
-  id_stage:
-    source_files:
-      - ID_Stage/rtl.sv
-      - Decoder/rtl.sv
-      - Immediate_Generator/rtl.sv
-      - Register_File/rtl.sv
-      - Main_Control/rtl.sv
-
-  alu:
-    source_files:
-      - ALU/rtl.sv
-
-  alu_control:
-    source_files:
-      - ALU_Control/rtl.sv
-
-  ex_stage:
-    source_files:
-      - EX_Stage/rtl.sv
-      - ALU/rtl.sv
-      - ALU_Control/rtl.sv
-
-  wb_stage:
-    source_files:
-      - WB_Stage/rtl.sv
-
-  single_cycle_riscv:
-    source_files:
-      - Single_Cycle_RISCV/rtl.sv
-      - IF_Stage/rtl.sv
-      - ID_Stage/rtl.sv
-      - Decoder/rtl.sv
-      - Immediate_Generator/rtl.sv
-      - Register_File/rtl.sv
-      - Main_Control/rtl.sv
-      - EX_Stage/rtl.sv
-      - ALU/rtl.sv
-      - ALU_Control/rtl.sv
-      - WB_Stage/rtl.sv
-
-          echo "Root files:"
-          ls -la
-
-          echo "Single Cycle folder:"
-          ls -la Single_Cycle_RISCV/
-
-          echo "Check RTL file:"
-          if [ -f "./Single_Cycle_RISCV/rtl.sv" ]; then
-            echo "RTL FILE FOUND"
-          else
-            echo "RTL FILE NOT FOUND"
-            exit 1
-          fi
+      - name: Check Verilog files
+        run: |
+          find . -name "*.sv" -o -name "*.v"
