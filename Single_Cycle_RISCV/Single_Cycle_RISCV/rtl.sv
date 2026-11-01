@@ -1,4 +1,4 @@
-module single_cycle_riscv (
+ module single_cycle_riscv (
     input  logic        clk,
     input  logic        reset,
     input  logic        stall,
