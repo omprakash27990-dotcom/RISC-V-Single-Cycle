@@ -1,4 +1,4 @@
-module if_stage (
+module IF_Stage (
     input  logic        clk,
     input  logic        reset,
     input  logic        stall,
