@@ -22,23 +22,21 @@ jobs:
           echo "RISC-V Single Cycle Integration"
           find . -name "*.sv" -o -name "*.v"
 
-      - name: Check integration source
+      - name: debug Check integration source
         run: |
-    
-          echo "Checking RISC-V source files..."
+          echo "Current directory:"
+          pwd
 
-          for file in \
-            Single_Cycle_RISCV/rtl.sv \
-            IF_Stage/rtl.sv \
-            ID_Stage/rtl.sv \
-            EX_Stage/rtl.sv \
-            WB_Stage/rtl.sv \
-            ALU/rtl.sv \
-            ALU_Control/rtl.sv
-          do
-            if [ -f "$file" ]; then
-              echo "FOUND: $file"
-            else
-              echo "MISSING: $file"
-            fi
-          done
+          echo "Root files:"
+          ls -la
+
+          echo "Single Cycle folder:"
+          ls -la Single_Cycle_RISCV/
+
+          echo "Check RTL file:"
+          if [ -f "./Single_Cycle_RISCV/rtl.sv" ]; then
+            echo "RTL FILE FOUND"
+          else
+            echo "RTL FILE NOT FOUND"
+            exit 1
+          fi
