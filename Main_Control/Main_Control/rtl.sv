@@ -1,4 +1,3 @@
-
 module main_control (
     input  logic [6:0] opcode,
     input  logic [2:0] fn3,
