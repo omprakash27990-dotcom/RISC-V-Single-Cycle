@@ -24,11 +24,21 @@ jobs:
 
       - name: Check integration source
         run: |
-          test -f Single_Cycle_RISCV/rtl.sv
-          test -f IF_Stage/rtl.sv
-          test -f ID_Stage/rtl.sv
-          test -f EX_Stage/rtl.sv
-          test -f WB_Stage/rtl.sv
-          test -f ALU/rtl.sv
-          test -f ALU_Control/rtl.sv
-          echo "Required source files found"
+    
+          echo "Checking RISC-V source files..."
+
+          for file in \
+            Single_Cycle_RISCV/rtl.sv \
+            IF_Stage/rtl.sv \
+            ID_Stage/rtl.sv \
+            EX_Stage/rtl.sv \
+            WB_Stage/rtl.sv \
+            ALU/rtl.sv \
+            ALU_Control/rtl.sv
+          do
+            if [ -f "$file" ]; then
+              echo "FOUND: $file"
+            else
+              echo "MISSING: $file"
+            fi
+          done
