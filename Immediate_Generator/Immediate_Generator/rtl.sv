@@ -1,5 +1,4 @@
-  
-module imm_generator(
+  module imm_generator(
     input  logic [11:0] imm_input,
     input  logic [2:0]  fn3,
     input  logic [6:0]  opcode,
