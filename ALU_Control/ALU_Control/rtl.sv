@@ -1,4 +1,4 @@
-module alu_control (
+module  ALU_control (
 input  logic [2:0] alu_op,
 input  logic [2:0] fn3,
 input  logic [6:0] imm11_5,
