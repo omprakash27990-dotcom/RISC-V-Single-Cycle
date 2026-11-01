@@ -24,11 +24,11 @@ jobs:
 
       - name: Check integration source
         run: |
-          test -f Single_Cycle_RISCV/Single_Cycle_RISCV/rtl.sv
-          test -f IF_Stage/IF_Stage/rtl.sv
-          test -f ID_Stage/ID_Stage/rtl.sv
-          test -f EX_Stage/EX_Stage/rtl.sv
-          test -f WB_Stage/WB_Stage/rtl.sv
-          test -f ALU/ALU/rtl.sv
-          test -f ALU_Control/ALU_Control/rtl.sv
+          test -f Single_Cycle_RISCV/rtl.sv
+          test -f IF_Stage/rtl.sv
+          test -f ID_Stage/rtl.sv
+          test -f EX_Stage/rtl.sv
+          test -f WB_Stage/rtl.sv
+          test -f ALU/rtl.sv
+          test -f ALU_Control/rtl.sv
           echo "Required source files found"
