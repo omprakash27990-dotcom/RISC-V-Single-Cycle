@@ -1,4 +1,3 @@
-
 module id_stage(
     input  logic        clk,
     input  logic        reset,
