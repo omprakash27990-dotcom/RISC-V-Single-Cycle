@@ -1,0 +1,34 @@
+name: RISC-V Integration
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  integration:
+    name: Integration Workflow
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Display project files
+        run: |
+          echo "RISC-V Single Cycle Integration"
+          find . -name "*.sv" -o -name "*.v"
+
+      - name: Check integration source
+        run: |
+          test -f Single_Cycle_RISCV/rtl.sv
+          test -f IF_Stage/rtl.sv
+          test -f ID_Stage/rtl.sv
+          test -f EX_Stage/rtl.sv
+          test -f WB_Stage/rtl.sv
+          test -f ALU/rtl.sv
+          test -f ALU_Control/rtl.sv
+          echo "Required source files found"
