@@ -13,7 +13,7 @@
 #    modules listed here too.
 yaml_version: 1
 
-stage: fetch
+stage: integration
 
 modules:
 
