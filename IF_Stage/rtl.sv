@@ -1,9 +1,9 @@
 module IF_Stage (
-    input  logic        clk,
-    input  logic        reset,
-    input  logic        stall,
-    input  logic        and_out,
-    input  logic [31:0] pc_signed_offset,
+    input logic clk,
+    input logic reset,
+    input logic stall,
+    input logic and_out,
+    input logic [31:0] pc_signed_offset,
     output logic [31:0] address,
     output logic [31:0] pc_new
 );
@@ -21,7 +21,7 @@ module IF_Stage (
 
     always_ff @(posedge clk or posedge reset) begin
         if (reset)
-            address <= 32'h8000_0000;
+            address <= 32'h80000000;
         else if (!stall)
             address <= pc_next;
     end
