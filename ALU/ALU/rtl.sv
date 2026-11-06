@@ -1,4 +1,4 @@
- module alu #(parameter int DATA_WIDTH = 32) (
+ module ALU #(parameter int DATA_WIDTH = 32) (
     input  logic [4:0]            alu_control,
     input  logic [DATA_WIDTH-1:0] rs1_data,
     input  logic [DATA_WIDTH-1:0] rs2_data,
