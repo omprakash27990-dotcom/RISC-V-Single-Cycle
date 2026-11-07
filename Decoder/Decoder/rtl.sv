@@ -1,5 +1,6 @@
-module decoder (
+module decoder(
     input  logic [31:0] instruction,
+
     output logic [4:0]  rs1,
     output logic [4:0]  rs2,
     output logic [4:0]  rd,
@@ -12,34 +13,36 @@ module decoder (
 );
 
 always_comb begin
-    rs1      = '0;
-    rs2      = '0;
-    rd       = '0;
-    opcode   = instruction[6:0];
-    imm11_5  = '0;
-    fn3      = '0;
-    imm      = '0;
-    imm_uj   = '0;
-    fn7_5    = '0;
 
-    case (instruction[6:0])
+    // Default values
+    rs1     = 5'b0;
+    rs2     = 5'b0;
+    rd      = 5'b0;
+    opcode  = instruction[6:0];
+    imm11_5 = 7'b0;
+    fn3     = 3'b0;
+    imm     = 12'b0;
+    imm_uj  = 20'b0;
+    fn7_5   = 1'b0;
+
+    case (opcode)
 
         // R-type
         7'b0110011: begin
-            rd    = instruction[11:7];
-            fn3   = instruction[14:12];
-            rs1   = instruction[19:15];
-            rs2   = instruction[24:20];
-            fn7_5 = instruction[30];
+            rd     = instruction[11:7];
+            fn3    = instruction[14:12];
+            rs1    = instruction[19:15];
+            rs2    = instruction[24:20];
+            fn7_5  = instruction[30];
         end
 
         // I-type ALU
         7'b0010011: begin
-            rd       = instruction[11:7];
-            fn3      = instruction[14:12];
-            rs1      = instruction[19:15];
-            imm      = instruction[31:20];
-            imm11_5  = instruction[31:25];
+            rd      = instruction[11:7];
+            fn3     = instruction[14:12];
+            rs1     = instruction[19:15];
+            imm     = instruction[31:20];
+            imm11_5 = instruction[31:25];
         end
 
         // Load
@@ -82,8 +85,13 @@ always_comb begin
             imm = instruction[31:20];
         end
 
-        // LUI / AUIPC
-        7'b0110111,
+        // LUI
+        7'b0110111: begin
+            rd = instruction[11:7];
+            imm_uj = instruction[31:12];
+        end
+
+        // AUIPC
         7'b0010111: begin
             rd = instruction[11:7];
             imm_uj = instruction[31:12];
@@ -93,6 +101,7 @@ always_comb begin
         end
 
     endcase
+
 end
 
 endmodule
